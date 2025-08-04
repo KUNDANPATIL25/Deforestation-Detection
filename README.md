@@ -1,20 +1,8 @@
-1. Installed and Imported Libraries
-I started by installing and importing the necessary Python libraries. These included:
+🔥 Classification of Fire Types in India Using MODIS Satellite Data (2021–2023)
+This project uses MODIS satellite data to classify different types of fires across India between 2021 and 2023. It involves data preprocessing, exploratory data analysis, and the use of machine learning models to classify fire types using confidence levels, satellite metadata, and spatial attributes.
 
-numpy and pandas for handling and analyzing data
-
-matplotlib and seaborn for creating visualizations
-
-scikit-learn for machine learning models and preprocessing
-
-xgboost for using the XGBoost classifier
-
-folium was listed for map-based visualizations (though not yet used)
-
-These libraries provided the basic tools needed for data analysis, visualization, and building classification models.
-
-2. Loaded Datasets
-I loaded three CSV files:
+📁 Dataset Description
+We have used three datasets sourced from MODIS for the years:
 
 modis_2021_India.csv
 
@@ -22,66 +10,86 @@ modis_2022_India.csv
 
 modis_2023_India.csv
 
-Each file was loaded into its own dataframe (df1, df2, df3). These files contain fire detection data from different years.
+Each dataset includes fire incident records with attributes such as location (latitude, longitude), brightness, confidence level, date, time, and detection instrument.
 
-3. Displayed Sample Data
-After loading the files, I printed the first few rows of each dataframe using head(), and also viewed the last few rows of df1 using tail(). This helped me check that the files were loaded correctly and that the data looked clean.
+⚙️ Libraries and Tools Used
+pandas, numpy – Data handling and manipulation
 
-4. Combined All Years into One Dataset
-I merged the three dataframes (df1, df2, and df3) into one single dataframe called df using the concat() function. This allowed me to work with all three years of data together.
+matplotlib, seaborn – Data visualization
 
-I then printed the first few rows of the combined dataset to confirm that the merge was successful.
+scikit-learn – Machine learning algorithms and preprocessing
 
-5. Checked Dataset Size and Structure
-I used:
+xgboost – Gradient boosting classifier
 
-shape to see the number of rows and columns
+folium – (Planned) map-based visualizations
 
-info() to check data types and memory usage
+📌 Project Steps
+1. 📦 Installed and Imported Libraries
+Essential libraries for data analysis, visualization, and machine learning were imported at the beginning.
 
-isnull().sum() to check for missing values
+2. 📂 Loaded and Merged Datasets
+Loaded 3 datasets (2021–2023) individually into df1, df2, and df3.
 
-duplicated().sum() to check for duplicate rows
+Combined them using pd.concat() into a single DataFrame df.
 
-columns to see all column names
+3. 👁️‍🗨️ Viewed Sample Data
+Used .head() and .tail() to verify data integrity.
 
-describe().T to view summary statistics like mean, min, max, etc.
+Confirmed clean and structured format across files.
 
-These steps helped me understand what kind of data I was dealing with and whether there were any issues to fix.
+4. 🧮 Basic Data Checks
+.shape, .info(), and .describe() were used to inspect structure and summary statistics.
 
-6. Checked Class Distribution of Target Column
-I used value_counts() on the type column to see how many records belong to each fire type. I noticed that:
+Checked for:
 
-Most of the data was labeled as "MODIS"
+Missing values
 
-Fewer records were labeled as "VIIRS"
+Duplicate entries
 
-This showed that the target classes were imbalanced, which is something I may need to address during model training.
+Data types and memory usage
 
-7. Explored Categorical Data
-For every column that had text (categorical data), I printed:
+5. 📊 Target Class Distribution
+Used value_counts() on the type column to evaluate class imbalance.
 
-The name of the column
+Noted significant imbalance in fire type labels, indicating a need for resampling (e.g., SMOTE) later.
 
-All unique values in that column
+6. 🔤 Explored Categorical Variables
+Printed unique values and counts for text-based columns like:
 
-The number of unique values
+satellite (e.g., Terra, Aqua)
 
-This helped me understand how many categories each feature had, and whether any columns needed encoding.
+instrument (MODIS)
 
-8. Created Visualizations
-a. Count Plot for Fire Type
-I created a bar chart showing the number of occurrences of each fire type using Seaborn's countplot(). This confirmed that:
+daynight (Day/Night)
 
-"MODIS" was much more common than "VIIRS"
+7. 📈 Visual Analysis
+a. Fire Type Count Plot
+Used seaborn.countplot() to show the skew toward one dominant fire type.
 
-The dataset is imbalanced
+b. Confidence Histogram
+Visualized the distribution of confidence scores.
 
-b. Histogram for Confidence Values
-I created a histogram showing how confidence scores are distributed in the data. From this, I observed that:
+Found bimodal pattern with peaks in high and low confidence, few medium scores.
 
-There are two main groups: low confidence and high confidence
+📌 Key Observations
+The dataset is clean and comprehensive with no null or duplicate values.
 
-Very few records have medium confidence values
+A major class imbalance was observed in fire type distribution.
 
-This helped me understand how reliable the fire detection data is.
+High and low confidence scores dominate, indicating stronger reliability at extremes.
+
+📍 Future Work (Optional)
+Incorporate folium for interactive fire mapping.
+
+Apply SMOTE for class balancing.
+
+Evaluate different ML classifiers (Logistic Regression, Random Forest, etc.).
+
+Add model persistence using joblib.
+
+
+
+✍️ Author
+Kundan Sunil Patil
+B.Tech Final Year Engineering Student.
+MIT
